@@ -1,4 +1,4 @@
-import React, { useState, useEffect, type ChangeEvent } from 'react';
+import  { useState, useEffect, type ChangeEvent } from 'react';
 import '../styles/ExpenseList.css';
 import { API_URL } from '../apis/apiUrl';
 import type { Expense } from '../types';
