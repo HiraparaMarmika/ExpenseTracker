@@ -1,0 +1,84 @@
+/* Main form container */
+.expenseform {
+  width: 380px;
+  background-color: #ffffff;
+  padding: 32px;
+  margin: 60px auto;
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* Title */
+.expenseform h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #2B2A2A;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+/* Labels */
+.expenseform label {
+  display: block;
+  margin-top: 18px;
+  font-size: 14px;
+  color: #2B2A2A;
+  font-weight: 500;
+}
+
+/* Inputs & select */
+.expenseform input,
+.expenseform select {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+/* Focus state */
+.expenseform input:focus,
+.expenseform select:focus {
+  outline: none;
+  border-color: #5A7ACD;
+  box-shadow: 0 0 0 2px rgba(90, 122, 205, 0.2);
+}
+
+/* Select cursor */
+.expenseform select {
+  cursor: pointer;
+}
+
+/* Button container */
+.btn {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Submit button */
+.btn button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #5A7ACD;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Button hover */
+.btn button:hover {
+  background-color: #FEB05D;
+  color: #2B2A2A;
+}
+
+/* Button active */
+.btn button:active {
+  transform: scale(0.98);
+}

@@ -1,0 +1,73 @@
+/* Page layout */
+.expense-details {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 0 15px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Title */
+  .expense-details h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2B2A2A;
+    font-size: 28px;
+    font-weight: 600;
+  }
+  
+  /* Card */
+  .details-card {
+    background: linear-gradient(145deg, #ffffff, #f4f6fb);
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    border-left: 6px solid #5A7ACD;
+  }
+  
+  /* Detail rows */
+  .details-card p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    padding: 12px 0;
+    margin: 0;
+    border-bottom: 1px solid #eaeaea;
+    color: #333;
+  }
+  
+  .details-card p:last-child {
+    border-bottom: none;
+  }
+  
+  /* Label */
+  .details-card strong {
+    color: #5A7ACD;
+    font-weight: 600;
+  }
+  
+  /* Value highlight */
+  .details-card span {
+    color: #2B2A2A;
+    font-weight: 500;
+  }
+  
+  /* Back button */
+  .btn-back {
+    display: block;
+    margin: 30px auto 0;
+    background: linear-gradient(135deg, #5A7ACD, #7B9BFF);
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(90, 122, 205, 0.4);
+  }
+  

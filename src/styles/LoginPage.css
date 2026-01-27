@@ -1,0 +1,142 @@
+/* FULL PAGE */
+.login-page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    font-family: "Segoe UI", sans-serif;
+  }
+  
+  /* LEFT SIDE */
+  .login-left {
+    width: 50%;
+    background: #fdf1e4; /* light theme */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    text-align: center;
+  }
+  
+  .login-left img {
+    width: 260px;
+    margin-bottom: 25px;
+  }
+  
+  .login-left h1 {
+    font-size: 30px;
+    color: #2b2a2a;
+    margin-bottom: 10px;
+  }
+  
+  .login-left p {
+    font-size: 15px;
+    color: #555;
+  }
+  
+  /* RIGHT SIDE */
+  .login-right {
+    width: 50%;
+    background: #f4f6f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* FORM CARD */
+  .login-card {
+    width: 420px;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* HEADER */
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .login-icon {
+    font-size: 28px;
+    color: #feb05d;
+  }
+  
+  .app-title {
+    font-weight: 700;
+    color: #2b2a2a;
+  }
+  
+  /* TITLE */
+  .login-title {
+    text-align: center;
+    margin: 20px 0;
+    color: #5a7acd;
+  }
+  
+  /* LABELS */
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2b2a2a;
+  }
+  
+  /* INPUTS */
+  .login-card input {
+    width: 100%;
+    height: 44px;
+    margin: 6px 0 14px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #d6d6d6;
+  }
+  
+  .login-card input:focus {
+    outline: none;
+    border-color: #5a7acd;
+  }
+  
+  /* BUTTON */
+  .signin-btn {
+    width: 100%;
+    background: #feb05d;
+    color: #2b2a2a;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .signin-btn:hover {
+    background: #f1a148;
+  }
+  
+  /* ERROR */
+  .validation {
+    color: #d80000;
+    font-size: 12px;
+    margin-top: -8px;
+    margin-bottom: 10px;
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .login-page {
+      flex-direction: column;
+    }
+  
+    .login-left,
+    .login-right {
+      width: 100%;
+      height: 50%;
+    }
+  
+    .login-card {
+      width: 90%;
+    }
+  }
+  

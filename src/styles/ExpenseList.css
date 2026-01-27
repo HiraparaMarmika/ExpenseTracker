@@ -1,0 +1,129 @@
+/* Main container */
+.ExpenseList {
+  width: 75vw;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Header + Search */
+.list-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.list-search h1 {
+  color: #2B2A2A;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+/* Search & filter */
+.list-search select,
+.list-search input {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.list-search select:focus,
+.list-search input:focus {
+  border-color: #5A7ACD;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Table header */
+th {
+  background-color: #5A7ACD;
+  color: #ffffff;
+  padding: 12px;
+  text-align: left;
+  font-weight: 500;
+}
+
+/* Table rows */
+td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  color: #2B2A2A;
+  background-color: #ffffff;
+}
+
+tr:hover td {
+  background-color: #F4F6F8;
+}
+
+/* Buttons */
+.btn-edit {
+  background-color: #FEB05D;
+  color: #2B2A2A;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.btn-edit:hover {
+  background-color: #fda737;
+}
+
+.btn-delete {
+  background-color: #e74c3c;
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.btn-delete:hover {
+  background-color: #c0392b;
+}
+
+/* Total amount */
+.expense-total td {
+  font-weight: 600;
+  text-align: right;
+  background-color: #F4F6F8;
+  color: #2B2A2A;
+}
+
+/* Empty state */
+.no-data {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+}
+.btn-readmore {
+  background: linear-gradient(135deg, #5A7ACD, #7B9BFF);
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.btn-readmore:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(90, 122, 205, 0.4);
+}

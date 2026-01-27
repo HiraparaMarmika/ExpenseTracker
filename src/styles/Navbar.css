@@ -1,0 +1,69 @@
+/* Main navbar background */
+.main-container {
+  background-color: #5A7ACD; /* Blue from theme */
+}
+
+/* Navbar layout */
+.nav-container {
+  width: 1200px;
+  padding: 14px 20px;
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* App title */
+.nav-container h1 {
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+/* Nav links wrapper */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.nav-link ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Nav links */
+.links {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.links:hover {
+  background-color: #FEB05D; /* Orange highlight */
+  color: #2B2A2A; /* Dark text */
+}
+
+/* Active route */
+.links.active {
+  background-color: #FEB05D;
+  color: #2B2A2A;
+}
+
+/* Logout button style */
+.nav-container > div:last-child .links {
+  background-color: #FEB05D;
+  color: #2B2A2A;
+  font-weight: 600;
+}
+
+.nav-container > div:last-child .links:hover {
+  background-color: #ffffff;
+  color: #2B2A2A;
+}
