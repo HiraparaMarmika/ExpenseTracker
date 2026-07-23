@@ -32,7 +32,7 @@ export default function LoginPage() {
 
     try {
       const response = await fetch(
-        "https://69730d4eb5f46f8b5825fbd1.mockapi.io/user",
+        "https://6a61b61ada10c59c1809be97.mockapi.io/expense-tracker/login",
         {
           method: "POST",
           headers: {
