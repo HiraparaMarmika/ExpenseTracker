@@ -1,27 +1,15 @@
 import { useEffect, useState } from 'react'
 import '../styles/ExpenseDetails.css'
 import {useParams } from 'react-router-dom';
-import { API_URL } from '../apis/apiUrl';
 function ExpenseDetails() {
     const { id } = useParams();
     const [expense, setExpense] = useState(null);
 
     useEffect(() => {
-        const fetchExpense = async () => {
-            try {
-                const res = await fetch(`${API_URL}/${id}`);
-                if (res.ok) {
-                    const data = await res.json();
-                    setExpense(data);
-                } else {
-                    console.error('Failed to fetch expense');
-                }
-            } catch (error) {
-                console.error('Error fetching expense:', error);
-            }
-        };
-
-        fetchExpense();
+        const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+        const savedExpense = expenses.find((item) => String(item.id) === id);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setExpense(savedExpense || null);
     }, [id]);
     return (
         <>

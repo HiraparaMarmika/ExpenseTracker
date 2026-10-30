@@ -51,6 +51,13 @@
   cursor: pointer;
 }
 
+/* Validation messages */
+.expenseform .validation {
+  margin: 6px 0 0;
+  color: #d80000;
+  font-size: 12px;
+}
+
 /* Button container */
 .btn {
   margin-top: 30px;

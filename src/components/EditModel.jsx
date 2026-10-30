@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
-import { API_URL } from "../apis/apiUrl";
 import "../styles/EditModel.css";
 
 function EditModel({ editId, onClose, onUpdate }) {
@@ -12,20 +10,12 @@ function EditModel({ editId, onClose, onUpdate }) {
     category: "",
   });
 
-  // Fetch single expense
   useEffect(() => {
-    const fetchExpense = async () => {
-      try {
-        const res = await fetch(`${API_URL}/${editId}`);
-        if (!res.ok) throw new Error("Fetch failed");
-        const data = await res.json();
-        setFormData(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
+    const expenses = JSON.parse(localStorage.getItem("expenses") || "[]");
+    const expense = expenses.find((item) => item.id === editId);
 
-    fetchExpense();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (expense) setFormData(expense);
   }, [editId]);
 
   // Handle change
@@ -38,30 +28,22 @@ function EditModel({ editId, onClose, onUpdate }) {
   };
 
   // Update expense
-  const handleUpdate = async (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
 
-    try {
-      const res = await fetch(`${API_URL}/${editId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+    const expenses = JSON.parse(localStorage.getItem("expenses") || "[]");
+    const updatedExpenses = expenses.map((item) =>
+      item.id === editId ? formData : item
+    );
 
-      if (!res.ok) throw new Error("Update failed");
-
-      onUpdate(); 
-      onClose(); 
-    } catch (err) {
-      console.error("Update error:", err);
-    }
+    localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
+    onUpdate();
+    onClose();
   };
 
-  return createPortal(
-    <>
-      <div className="model" onClick={onClose}></div>
-
-      <div className="form-box">
+  return (
+    <div className="model" onClick={onClose}>
+      <div className="form-box" onClick={(e) => e.stopPropagation()}>
         <form onSubmit={handleUpdate}>
           <h1>Edit Expense</h1>
 
@@ -113,8 +95,7 @@ function EditModel({ editId, onClose, onUpdate }) {
           </div>
         </form>
       </div>
-    </>,
-    document.getElementById("modal-root")
+    </div>
   );
 }
 

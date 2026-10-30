@@ -12,6 +12,7 @@ export default function LoginPage() {
     email: "",
     password: "",
   });
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,34 +20,31 @@ export default function LoginPage() {
       ...prev,
       [name]: value,
     }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch(
-        "https://6a61b61ada10c59c1809be97.mockapi.io/expense-tracker/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+    const newErrors = {};
 
-      if (!response.ok) {
-        throw new Error("Login failed");
-      }
-
-      const data = await response.json();
-      localStorage.setItem("user", JSON.stringify(data));
-      navigate("/");
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Login failed. Please try again.");
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } 
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
     }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    localStorage.setItem("user", JSON.stringify(formData));
+    navigate("/");
   };
 
   return (
@@ -68,7 +66,7 @@ export default function LoginPage() {
 
           <h2 className="login-title">Login Now!</h2>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} noValidate>
             <label>Name</label>
             <input
               type="text"
@@ -76,8 +74,8 @@ export default function LoginPage() {
               placeholder="Enter name"
               value={formData.name}
               onChange={handleChange}
-              required
             />
+            {errors.name && <p className="validation">{errors.name}</p>}
 
             <label>Email</label>
             <input
@@ -86,8 +84,8 @@ export default function LoginPage() {
               placeholder="Email address"
               value={formData.email}
               onChange={handleChange}
-              required
             />
+            {errors.email && <p className="validation">{errors.email}</p>}
 
             <label>Password</label>
             <input
@@ -96,8 +94,8 @@ export default function LoginPage() {
               placeholder="Password"
               value={formData.password}
               onChange={handleChange}
-              required
             />
+            {errors.password && <p className="validation">{errors.password}</p>}
 
             <button type="submit" className="signin-btn">
               SIGN IN

@@ -1,63 +1,42 @@
 import { useState, useEffect } from 'react';
 import '../styles/ExpenseList.css';
-import { API_URL } from '../apis/apiUrl';
 import EditModel from './EditModel';
+import ConfirmationModal from './ConfirmationModal';
 import { useNavigate } from 'react-router-dom';
 export default function ExpenseList() {
     const [expenses, setExpenses] = useState([]);
-    const [totalAmount, setTotalAmount] = useState(0);
     const [filter, setFilter] = useState('all');
     const [searchTerm, setSearchTerm] = useState('');
     const [openModel, setOpenModel] = useState(false);
     const [editId, setEditId] = useState(null);
+    const [deleteExpense, setDeleteExpense] = useState(null);
     const navigate = useNavigate();
 
-    //Fetch data
-    const fetchExpenses = async () => {
-        try {
-            const res = await fetch(API_URL);
-            const data = await res.json();
-            setExpenses(data);
-
-            // calculate total
-            const total = data.reduce((sum, item) => sum + Number(item.amount), 0);
-            setTotalAmount(total);
-        } catch (error) {
-            console.error('Error fetching expenses:', error);
-        }
+    const loadExpenses = () => {
+        const savedExpenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+        setExpenses(savedExpenses);
     };
+
     useEffect(() => {
-        // Safe: we only call fetchExpenses on mount
+        // Safe: we only read localStorage on mount
         // eslint-disable-next-line react-hooks/set-state-in-effect
-        fetchExpenses();
+        loadExpenses();
     }, []);
+
     // Delete handler
-    const handleDelete = async (id) => {
-        if (!id) return;
+    const handleDelete = (id) => {
+        if (id === null) return;
 
-        try {
-            const res = await fetch(`${API_URL}/${id}`, {
-                method: 'DELETE',
-            });
-
-            if (res.ok) {
-                // Remove deleted expense from state
-                const updatedExpenses = expenses.filter((item) => item.id !== id);
-                setExpenses(updatedExpenses);
-
-                // Update total amount
-                const total = updatedExpenses.reduce(
-                    (sum, item) => sum + Number(item.amount),
-                    0
-                );
-                setTotalAmount(total);
-            } else {
-                console.error('Failed to delete expense');
-            }
-        } catch (error) {
-            console.error('Error deleting expense:', error);
-        }
+        const updatedExpenses = expenses.filter((item) => item.id !== id);
+        localStorage.setItem('expenses', JSON.stringify(updatedExpenses));
+        setExpenses(updatedExpenses);
+        setDeleteExpense(null);
     };
+
+    const totalAmount = expenses.reduce(
+        (sum, item) => sum + Number(item.amount),
+        0
+    );
     // Filtered expenses
     const filteredExpenses = expenses.filter((item) => {
         const matchesCategory = filter === 'all' || item.category === filter;
@@ -87,11 +66,13 @@ export default function ExpenseList() {
     return (
         <>
 
+        
+
             {openModel && editId !== null && (
                 <EditModel
                     editId={editId}
                     onClose={() => setOpenModel(false)}
-                    onUpdate={fetchExpenses}
+                    onUpdate={loadExpenses}
                 />
             )}
 
@@ -141,7 +122,7 @@ export default function ExpenseList() {
                                     <td>
                                         <button
                                             className="btn-delete"
-                                            onClick={() => handleDelete(item.id)}
+                                            onClick={() => setDeleteExpense(item)}
                                         >
                                             Delete
                                         </button>
@@ -171,6 +152,16 @@ export default function ExpenseList() {
                     )}
                 </table>
             </div>
+                {deleteExpense !== null && (
+                <ConfirmationModal
+                    title="Delete Expense"
+                    message={"Are you sure you want to delete this expense "}
+                    confirmText="Delete"
+                    cancelText="Cancle"
+                    onCancel={() => setDeleteExpense(null)}
+                    onConfirm={() => handleDelete(deleteExpense.id)}
+                />
+            )}
         </>
     );
 }
