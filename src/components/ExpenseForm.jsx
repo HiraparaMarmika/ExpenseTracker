@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Expense } from '../types';
 import '../styles/ExpenseForm.css';
 import { API_URL } from '../apis/apiUrl';
 
@@ -8,16 +7,14 @@ import { API_URL } from '../apis/apiUrl';
 export default function ExpenseForm() {
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState<Expense>({
+  const [formData, setFormData] = useState({
     amount: null,
     description: '',
     date: new Date().toISOString().split('T')[0],
     category: '',
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
 
     setFormData(prev => ({
@@ -26,7 +23,7 @@ export default function ExpenseForm() {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.amount || !formData.description || !formData.category) return;

@@ -1,25 +1,19 @@
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/LoginPage.css";
 import { FaWallet } from "react-icons/fa6";
 import logo from "../assets/expense-img.png";
 
-interface LoginForm {
-  name: string;
-  email: string;
-  password: string;
-}
-
 export default function LoginPage() {
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState<LoginForm>({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -27,7 +21,7 @@ export default function LoginPage() {
     }));
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {

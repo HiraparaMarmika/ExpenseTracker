@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 
-function PrivateRoutes({children}:any) {
+function PrivateRoutes({ children }) {
   const isLoggedIn = localStorage.getItem("user");
 
   if (!isLoggedIn) {

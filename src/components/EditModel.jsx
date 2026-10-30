@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import type { Expense } from "../types";
 import { API_URL } from "../apis/apiUrl";
 import "../styles/EditModel.css";
 
-interface EditModelProps {
-  editId: number;
-  onClose: () => void;
-  onUpdate: () => void;
-}
-
-function EditModel({ editId, onClose, onUpdate }: EditModelProps) {
-  const [formData, setFormData] = useState<Expense>({
+function EditModel({ editId, onClose, onUpdate }) {
+  const [formData, setFormData] = useState({
     id: editId,
     amount: null,
     description: "",
@@ -25,7 +18,7 @@ function EditModel({ editId, onClose, onUpdate }: EditModelProps) {
       try {
         const res = await fetch(`${API_URL}/${editId}`);
         if (!res.ok) throw new Error("Fetch failed");
-        const data: Expense = await res.json();
+        const data = await res.json();
         setFormData(data);
       } catch (err) {
         console.error(err);
@@ -36,9 +29,7 @@ function EditModel({ editId, onClose, onUpdate }: EditModelProps) {
   }, [editId]);
 
   // Handle change
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -47,7 +38,7 @@ function EditModel({ editId, onClose, onUpdate }: EditModelProps) {
   };
 
   // Update expense
-  const handleUpdate = async (e: React.FormEvent) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
 
     try {
@@ -123,7 +114,7 @@ function EditModel({ editId, onClose, onUpdate }: EditModelProps) {
         </form>
       </div>
     </>,
-    document.getElementById("modal-root") as HTMLElement
+    document.getElementById("modal-root")
   );
 }
 

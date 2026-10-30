@@ -1,23 +1,22 @@
-import  { useState, useEffect, type ChangeEvent } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/ExpenseList.css';
 import { API_URL } from '../apis/apiUrl';
-import type { Expense } from '../types';
 import EditModel from './EditModel';
 import { useNavigate } from 'react-router-dom';
 export default function ExpenseList() {
-    const [expenses, setExpenses] = useState<Expense[]>([]);
-    const [totalAmount, setTotalAmount] = useState<number>(0);
-    const [filter, setFilter] = useState<string>('all');
-    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [expenses, setExpenses] = useState([]);
+    const [totalAmount, setTotalAmount] = useState(0);
+    const [filter, setFilter] = useState('all');
+    const [searchTerm, setSearchTerm] = useState('');
     const [openModel, setOpenModel] = useState(false);
-    const [editId, setEditId] = useState<null | number>(null);
+    const [editId, setEditId] = useState(null);
     const navigate = useNavigate();
 
     //Fetch data
     const fetchExpenses = async () => {
         try {
             const res = await fetch(API_URL);
-            const data: Expense[] = await res.json();
+            const data = await res.json();
             setExpenses(data);
 
             // calculate total
@@ -29,12 +28,11 @@ export default function ExpenseList() {
     };
     useEffect(() => {
         // Safe: we only call fetchExpenses on mount
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         fetchExpenses();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-
     }, []);
     // Delete handler
-    const handleDelete = async (id?: number | string) => {
+    const handleDelete = async (id) => {
         if (!id) return;
 
         try {
@@ -69,21 +67,21 @@ export default function ExpenseList() {
     });
 
     // Handlers
-    const handleFilterChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const handleFilterChange = (e) => {
         setFilter(e.target.value);
     };
 
-    const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
 
 
-    const editHandler = (id: number) => {
+    const editHandler = (id) => {
         setEditId(id);
         setOpenModel(true);
     };
     // Read more handler
-    const handleReadMore = (id: number ) => {
+    const handleReadMore = (id) => {
         navigate(`/expenseDetails/${id}`);
     };
     return (
@@ -135,7 +133,7 @@ export default function ExpenseList() {
                     {filteredExpenses.length > 0 ? (
                         <>
                             {filteredExpenses.map((item) => (
-                                <tr>
+                                <tr key={item.id}>
                                     <td>{item.amount}</td>
                                     <td> {item.description}</td>
                                     <td> {item.date}</td>
@@ -151,14 +149,14 @@ export default function ExpenseList() {
                                     <td>
                                         <button
                                             className="btn-edit"
-                                            onClick={() => editHandler(item.id as number)}
+                                            onClick={() => editHandler(item.id)}
                                         >
                                             Edit
                                         </button>
                                     </td>
                                     <td><button
                                         className="btn-readmore"
-                                        onClick={() => handleReadMore(item.id as number)}
+                                        onClick={() => handleReadMore(item.id)}
                                     >
                                         Read More
                                     </button></td>
