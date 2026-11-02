@@ -29,6 +29,13 @@ export default function Navbar() {
                 </NavLink>
               </li>
             </ul>
+            <ul>
+              <li>
+                <NavLink className="links" to="/expense-items">
+                  Expense Items
+                </NavLink>
+              </li>
+            </ul>
           </div>
           <div>
             <NavLink className="links" to="" onClick={logout}>
